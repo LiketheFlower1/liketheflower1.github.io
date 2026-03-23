@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Unique page title: [Collection Theme] — Archive — [Artist Name] -->
+  <title>Victorian Botanical Engravings — Archive — [Artist Name]</title>
+
+  <!-- Unique meta description: 150–160 characters, describes the collection -->
+  <meta name="description" content="A curated collection of Victorian botanical engravings from the 1840s–1880s, featuring detailed plant illustrations of roses, lavender, sunflowers, and medicinal herbs. All images are public domain.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="page-collection page-wrapper">
+
+  <header class="site-header">
+    <a href="/" class="site-logo" aria-label="[Artist Name] — Home">
+      <img
+        src="/images/logo.png"
+        alt="[Artist Name]"
+        class="logo-image"
+        width="160"
+        height="60"
+      >
+    </a>
+
+    <nav class="site-nav" aria-label="Primary navigation">
+      <ul class="nav-list">
+        <li><a href="/gallery/" class="nav-link">Gallery</a></li>
+        <li><a href="/archive/" class="nav-link" aria-current="page">Archive</a></li>
+        <li>
+          <a
+            href="#"
+            class="nav-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >My Writing ↗</a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="nav-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Etsy ↗</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="site-main" id="main-content">
+    <div class="container">
+
+      <!-- Collection header: unique h1, visible description, breadcrumb label -->
+      <header class="collection-header">
+        <!-- Breadcrumb label: links back to archive landing -->
+        <p class="section-label">
+          <a href="/archive/" style="color: inherit; text-decoration: none;">Archive</a>
+          &nbsp;/&nbsp; Collection
+        </p>
+
+        <!-- h1: matches collection theme, used by search engines -->
+        <h1 class="page-title">Victorian Botanical Engravings</h1>
+
+        <!-- 2–3 sentences of visible descriptive text above the grid.
+             Write naturally — this text signals topic relevance to search engines. -->
+        <p class="page-description">
+          Detailed botanical engravings produced in Britain and Europe during the
+          Victorian era (1840s–1880s), a period when natural history illustration
+          reached extraordinary precision and artistry. These plates were originally
+          published in scientific and horticultural journals to document plant
+          morphology, medicinal properties, and ornamental varieties. All images
+          are out of copyright and freely available in the public domain.
+        </p>
+      </header>
+
+      <!-- Image grid: 4 example images with full SEO markup.
+           Filename, alt text, and figcaption all describe the image distinctly. -->
+      <section aria-label="Victorian botanical engravings collection">
+        <ul class="image-grid image-grid--collection">
+
+          <!-- IMAGE 1 -->
+          <li>
+            <figure class="image-block">
+              <!--
+                Filename convention:
+                [subject-type]-[subject-name]-[source-or-date].jpg
+                e.g. victorian-botanical-engraving-rosa-canina-1850.jpg
+              -->
+              <img
+                src="/archive/victorian-botanicals/images/victorian-botanical-engraving-rosa-canina-1850.jpg"
+                alt="Victorian botanical engraving showing the full Rosa canina plant with open pink flowers, closed buds, and red rosehips on a thorned stem, with detailed leaf structure, 1850"
+                width="800"
+                height="1050"
+                loading="lazy"
+              >
+              <!-- Visible caption: real HTML text, indexed by search engines -->
+              <figcaption>
+                <em>Rosa canina</em> (Dog Rose). Engraving from Köhler's
+                <em>Medizinal-Pflanzen</em>, 1850. Public domain.
+              </figcaption>
+            </figure>
+          </li>
+
+          <!-- IMAGE 2 -->
+          <li>
+            <figure class="image-block">
+              <img
+                src="/archive/victorian-botanicals/images/victorian-botanical-engraving-lavandula-angustifolia-1870.jpg"
+                alt="Victorian botanical plate of Lavandula angustifolia (common lavender) showing the full flowering spike with purple blooms, close-up floret detail, and cross-section of calyx, c. 1870"
+                width="800"
+                height="1050"
+                loading="lazy"
+              >
+              <figcaption>
+                <em>Lavandula angustifolia</em> (Common Lavender). Botanical
+                plate with anatomical detail, c. 1870. Public domain.
+              </figcaption>
+            </figure>
+          </li>
+
+          <!-- IMAGE 3 -->
+          <li>
+            <figure class="image-block">
+              <img
+                src="/archive/victorian-botanicals/images/victorian-botanical-engraving-helianthus-annuus-1865.jpg"
+                alt="Victorian botanical engraving of Helianthus annuus (common sunflower) in full bloom, showing the large composite flower head, stem with alternate leaves, and a cross-section of the seed head, 1865"
+                width="800"
+                height="1050"
+                loading="lazy"
+              >
+              <figcaption>
+                <em>Helianthus annuus</em> (Common Sunflower). Botanical
+                engraving, 1865. Public domain.
+              </figcaption>
+            </figure>
+          </li>
+
+          <!-- IMAGE 4 -->
+          <li>
+            <figure class="image-block">
+              <img
+                src="/archive/victorian-botanicals/images/victorian-botanical-engraving-papaver-somniferum-1855.jpg"
+                alt="Victorian botanical plate of Papaver somniferum (opium poppy) showing a single flower with crinkled petals, an unripe seed capsule, a ripe dried pod, and labeled botanical cross-sections, 1855"
+                width="800"
+                height="1050"
+                loading="lazy"
+              >
+              <figcaption>
+                <em>Papaver somniferum</em> (Opium Poppy). Botanical plate with
+                seed capsule detail, 1855. Public domain.
+              </figcaption>
+            </figure>
+          </li>
+
+          <!-- Add more <li> / <figure> blocks here.
+               Copy the pattern above: descriptive filename, alt text, figcaption. -->
+
+        </ul>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>
+        © <span>[YEAR]</span> [Artist Name] —
+        <a href="/archive/">← Back to Archive</a> —
+        All archive images are public domain.
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
