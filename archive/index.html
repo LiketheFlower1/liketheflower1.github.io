@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archive — Public Domain Image Collection — [Artist Name]</title>
+  <meta name="description" content="A curated archive of public domain images organized by theme — botanical engravings, natural history prints, anatomical illustrations, and more.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="page-archive page-wrapper">
+
+  <header class="site-header">
+    <a href="/" class="site-logo" aria-label="[Artist Name] — Home">
+      <img
+        src="/images/logo.png"
+        alt="[Artist Name]"
+        class="logo-image"
+        width="160"
+        height="60"
+      >
+    </a>
+
+    <nav class="site-nav" aria-label="Primary navigation">
+      <ul class="nav-list">
+        <li><a href="/gallery/" class="nav-link">Gallery</a></li>
+        <li><a href="/archive/" class="nav-link" aria-current="page">Archive</a></li>
+        <li>
+          <a
+            href="#"
+            class="nav-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >My Writing ↗</a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="nav-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Etsy ↗</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="site-main" id="main-content">
+    <div class="container">
+
+      <header class="archive-header">
+        <p class="section-label">Public Domain</p>
+        <h1 class="page-title">Archive</h1>
+        <p class="page-description">
+          A personal collection of public domain images organized by theme.
+          All works are out of copyright and freely available. Click any theme
+          to browse the full collection.
+        </p>
+      </header>
+
+      <!-- Theme grid: each card links to a collection sub-page.
+           Add a new <li> for each new theme you create.
+           Create a matching folder at /archive/[theme-name]/
+           and copy collection-template.html into it as index.html. -->
+      <section aria-label="Archive themes">
+        <ul class="image-grid image-grid--archive">
+
+          <!-- THEME CARD — Victorian Botanical Engravings -->
+          <li>
+            <article class="theme-card">
+              <a href="/archive/victorian-botanicals/">
+                <!-- Use one strong representative image per theme -->
+                <img
+                  src="/archive/victorian-botanicals/images/victorian-botanical-engraving-rosa-canina-1850.jpg"
+                  alt="Victorian botanical engraving of Rosa canina, dog rose plant with flowers and hips, 1850"
+                  width="800"
+                  height="600"
+                  loading="lazy"
+                >
+                <p class="theme-card__title">Victorian Botanical Engravings</p>
+              </a>
+            </article>
+          </li>
+
+          <!-- THEME CARD PLACEHOLDER — add more themes below using the same pattern -->
+
+          <li>
+            <article class="theme-card">
+              <a href="/archive/[theme-name]/">
+                <img
+                  src="/archive/[theme-name]/images/[representative-image-filename].jpg"
+                  alt="[Descriptive alt text for the representative image]"
+                  width="800"
+                  height="600"
+                  loading="lazy"
+                >
+                <p class="theme-card__title">[Theme Name]</p>
+              </a>
+            </article>
+          </li>
+
+          <li>
+            <article class="theme-card">
+              <a href="/archive/[theme-name-2]/">
+                <img
+                  src="/archive/[theme-name-2]/images/[representative-image-filename].jpg"
+                  alt="[Descriptive alt text for the representative image]"
+                  width="800"
+                  height="600"
+                  loading="lazy"
+                >
+                <p class="theme-card__title">[Theme Name 2]</p>
+              </a>
+            </article>
+          </li>
+
+          <li>
+            <article class="theme-card">
+              <a href="/archive/[theme-name-3]/">
+                <img
+                  src="/archive/[theme-name-3]/images/[representative-image-filename].jpg"
+                  alt="[Descriptive alt text for the representative image]"
+                  width="800"
+                  height="600"
+                  loading="lazy"
+                >
+                <p class="theme-card__title">[Theme Name 3]</p>
+              </a>
+            </article>
+          </li>
+
+          <!-- Keep adding <li> / <article class="theme-card"> blocks for each new collection -->
+
+        </ul>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span>[YEAR]</span> [Artist Name] — Archive images are public domain.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
