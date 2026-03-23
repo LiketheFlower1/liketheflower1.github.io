@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery — [Artist Name]</title>
+  <meta name="description" content="Original drawings and artwork by [Artist Name].">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="page-gallery page-wrapper">
+
+  <header class="site-header">
+    <!-- Logo: replace /images/logo.png with your actual logo file -->
+    <a href="/" class="site-logo" aria-label="[Artist Name] — Home">
+      <img
+        src="/images/logo.png"
+        alt="[Artist Name]"
+        class="logo-image"
+        width="160"
+        height="60"
+      >
+    </a>
+
+    <nav class="site-nav" aria-label="Primary navigation">
+      <ul class="nav-list">
+        <li><a href="/gallery/" class="nav-link" aria-current="page">Gallery</a></li>
+        <li><a href="/archive/" class="nav-link">Archive</a></li>
+        <li>
+          <a
+            href="#"
+            class="nav-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >My Writing ↗</a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="nav-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Etsy ↗</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="site-main" id="main-content">
+    <div class="container">
+
+      <header class="gallery-header">
+        <p class="section-label">Work</p>
+        <h1 class="page-title">Gallery</h1>
+      </header>
+
+      <!-- Image grid: add or remove <article> blocks as needed.
+           Each image links to an external URL and opens in a new tab.
+           Follow filename conventions: descriptive-kebab-case.jpg
+           See image-block-snippet.html for copy-paste block. -->
+      <section aria-label="Gallery images">
+        <ul class="image-grid image-grid--gallery">
+
+          <!-- [IMAGE BLOCK — copy pattern below for each artwork] -->
+
+          <li>
+            <figure class="image-block">
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View [artwork title] (opens in new tab)"
+              >
+                <!-- Replace with: descriptive-artwork-title-year.jpg -->
+                <img
+                  src="/images/gallery/artwork-title-medium-year.jpg"
+                  alt="[Descriptive alt text: medium, subject, year]"
+                  width="800"
+                  height="1000"
+                  loading="lazy"
+                >
+              </a>
+              <figcaption>[Artwork Title], [Medium], [Year]</figcaption>
+            </figure>
+          </li>
+
+          <li>
+            <figure class="image-block">
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View [artwork title] (opens in new tab)"
+              >
+                <img
+                  src="/images/gallery/artwork-title-medium-year-02.jpg"
+                  alt="[Descriptive alt text: medium, subject, year]"
+                  width="800"
+                  height="1000"
+                  loading="lazy"
+                >
+              </a>
+              <figcaption>[Artwork Title], [Medium], [Year]</figcaption>
+            </figure>
+          </li>
+
+          <li>
+            <figure class="image-block">
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View [artwork title] (opens in new tab)"
+              >
+                <img
+                  src="/images/gallery/artwork-title-medium-year-03.jpg"
+                  alt="[Descriptive alt text: medium, subject, year]"
+                  width="800"
+                  height="1000"
+                  loading="lazy"
+                >
+              </a>
+              <figcaption>[Artwork Title], [Medium], [Year]</figcaption>
+            </figure>
+          </li>
+
+          <!-- Add more <li> / <figure> blocks here following the same pattern -->
+
+        </ul>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year">[YEAR]</span> [Artist Name]</p>
+    </div>
+  </footer>
+
+</body>
+</html>
