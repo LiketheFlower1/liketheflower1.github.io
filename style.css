@@ -1,0 +1,630 @@
+/*
+  ============================================================
+  STYLE GUIDE — style.css
+  ============================================================
+
+  COLOR PALETTE
+  --color-black    #000000   Primary text, borders, UI elements
+  --color-white    #FFFFFF   Page background, inverse text
+  --color-red      #D3000B   Accent only — hover states, single
+                             emphasis elements; use sparingly
+
+  TYPOGRAPHY
+  --font-mono      'DM Mono', monospace
+                   Used for: nav, headings, labels, captions,
+                   all UI/interface text
+  --font-serif     Georgia, 'Times New Roman', serif
+                   Used for: body paragraphs, bio, descriptions
+
+  FONT SIZES (generous — err large, not small)
+  --font-size-xs   0.75rem    Fine print, metadata
+  --font-size-sm   0.875rem   Captions, nav items
+  --font-size-base 1.125rem   Body text
+  --font-size-md   1.375rem   Lead paragraphs, descriptions
+  --font-size-lg   2rem       Section headings
+  --font-size-xl   3.5rem     Page titles (inner pages)
+  --font-size-2xl  6rem       Display — homepage name
+
+  FONT WEIGHTS
+  --font-weight-normal  400   Body text
+  --font-weight-medium  500   Headings, labels, nav
+
+  LETTER SPACING
+  --tracking-tight    -0.02em  Large display type
+  --tracking-normal    0       Body text
+  --tracking-wide      0.05em  Subheadings
+  --tracking-wider     0.1em   Labels, small caps
+  --tracking-widest    0.2em   Nav items
+
+  SPACING SCALE
+  --space-xs    0.5rem    8px
+  --space-sm    1rem      16px
+  --space-md    2rem      32px
+  --space-lg    4rem      64px
+  --space-xl    7rem      112px
+  --space-2xl   12rem     192px
+
+  LAYOUT
+  --max-width   1400px   Maximum content width
+  --gutter      clamp(1.5rem, 4vw, 4rem)   Responsive side padding
+
+  IMAGE GRID
+  --grid-min    260px    Minimum column width
+  --grid-gap    1.5rem   Gap between cells (desktop)
+  ============================================================
+*/
+
+/* ============================================================
+   CUSTOM PROPERTIES
+   ============================================================ */
+
+:root {
+  /* Colors */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-red:   #D3000B;
+
+  /* Typography — families */
+  --font-mono:   'DM Mono', monospace;
+  --font-serif:  Georgia, 'Times New Roman', serif;
+
+  /* Typography — sizes */
+  --font-size-xs:   0.75rem;
+  --font-size-sm:   0.875rem;
+  --font-size-base: 1.125rem;
+  --font-size-md:   1.375rem;
+  --font-size-lg:   2rem;
+  --font-size-xl:   3.5rem;
+  --font-size-2xl:  6rem;
+
+  /* Typography — weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+
+  /* Typography — letter spacing */
+  --tracking-tight:   -0.02em;
+  --tracking-normal:   0em;
+  --tracking-wide:     0.05em;
+  --tracking-wider:    0.1em;
+  --tracking-widest:   0.2em;
+
+  /* Spacing */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  2rem;
+  --space-lg:  4rem;
+  --space-xl:  7rem;
+  --space-2xl: 12rem;
+
+  /* Layout */
+  --max-width: 1400px;
+  --gutter:    clamp(1.5rem, 4vw, 4rem);
+
+  /* Grid */
+  --grid-min: 260px;
+  --grid-gap: 1.5rem;
+}
+
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-white);
+  color: var(--color-black);
+  font-family: var(--font-serif);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-red);
+}
+
+p + p {
+  margin-top: var(--space-sm);
+}
+
+
+/* ============================================================
+   LAYOUT UTILITIES
+   ============================================================ */
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-main {
+  flex: 1;
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-xl);
+}
+
+
+/* ============================================================
+   SITE HEADER — inner pages
+   ============================================================ */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--gutter);
+  border-bottom: 2px solid var(--color-black);
+  gap: var(--space-md);
+}
+
+.site-logo {
+  display: block;
+  flex-shrink: 0;
+  line-height: 1;
+  transition: opacity 0.1s ease;
+}
+
+.site-logo:hover {
+  opacity: 0.7;
+  color: inherit;
+}
+
+.logo-image {
+  height: 2.75rem;
+  width: auto;
+  display: block;
+}
+
+/* Fallback if logo image not yet provided */
+.logo-image[src=""] ,
+.logo-image:not([src]) {
+  display: none;
+}
+
+
+/* ============================================================
+   NAVIGATION — shared across all pages
+   ============================================================ */
+
+.site-nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm) var(--space-md);
+}
+
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-black);
+  text-decoration: none;
+  transition: color 0.1s ease;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: var(--color-red);
+}
+
+.nav-link[aria-current="page"] {
+  border-bottom: 2px solid var(--color-black);
+}
+
+
+/* ============================================================
+   HOMEPAGE
+   ============================================================ */
+
+body.page-home {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.home-layout {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-xl) var(--gutter) var(--space-xl);
+  max-width: var(--max-width);
+  width: 100%;
+  /* Generous left offset for editorial feel */
+  padding-left: max(var(--gutter), 8vw);
+}
+
+.home-logo-link {
+  display: inline-block;
+  margin-bottom: var(--space-md);
+  transition: opacity 0.1s ease;
+}
+
+.home-logo-link:hover {
+  opacity: 0.7;
+  color: inherit;
+}
+
+.home-logo-image {
+  height: auto;
+  width: clamp(140px, 22vw, 320px);
+  display: block;
+}
+
+/* Placeholder while logo image is pending */
+.logo-placeholder {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-tight);
+  line-height: 1;
+  color: var(--color-black);
+  margin-bottom: var(--space-md);
+}
+
+.home-name {
+  font-family: var(--font-mono);
+  font-size: clamp(var(--font-size-lg), 6vw, var(--font-size-2xl));
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-tight);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--color-black);
+  margin-bottom: var(--space-lg);
+}
+
+.home-bio {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-md);
+  line-height: 1.7;
+  max-width: 52ch;
+  color: var(--color-black);
+  margin-bottom: var(--space-lg);
+}
+
+.home-nav {
+  margin-top: auto;
+}
+
+.home-nav .nav-list {
+  gap: var(--space-sm) var(--space-lg);
+}
+
+.home-nav .nav-link {
+  font-size: var(--font-size-base);
+  letter-spacing: var(--tracking-wider);
+}
+
+
+/* ============================================================
+   PAGE TITLES — inner pages
+   ============================================================ */
+
+.page-title {
+  font-family: var(--font-mono);
+  font-size: clamp(var(--font-size-lg), 5vw, var(--font-size-xl));
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: var(--color-black);
+  margin-bottom: var(--space-md);
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-black);
+  margin-bottom: var(--space-sm);
+}
+
+.page-description {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-md);
+  line-height: 1.7;
+  max-width: 60ch;
+  color: var(--color-black);
+  margin-bottom: var(--space-lg);
+}
+
+
+/* ============================================================
+   IMAGE GRID
+   ============================================================ */
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--grid-min), 100%), 1fr));
+  gap: var(--grid-gap);
+}
+
+/* Wider columns for gallery (artist's own work) */
+.image-grid--gallery {
+  --grid-min: 300px;
+  --grid-gap: 2rem;
+}
+
+/* Archive theme cards — can be larger */
+.image-grid--archive {
+  --grid-min: 320px;
+  --grid-gap: 2.5rem;
+}
+
+/* Collection detail — standard width */
+.image-grid--collection {
+  --grid-min: 260px;
+  --grid-gap: 2rem;
+}
+
+
+/* ============================================================
+   IMAGE BLOCK — figure + figcaption
+   ============================================================ */
+
+.image-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.image-block a {
+  display: block;
+  overflow: hidden;
+}
+
+.image-block a:hover img {
+  opacity: 0.88;
+}
+
+.image-block img {
+  width: 100%;
+  height: auto;
+  display: block;
+  outline: 1px solid var(--color-black);
+  transition: opacity 0.15s ease;
+}
+
+.image-block figcaption {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-normal);
+  letter-spacing: var(--tracking-wide);
+  line-height: 1.5;
+  color: var(--color-black);
+  margin-top: var(--space-xs);
+  padding-top: var(--space-xs);
+  border-top: 1px solid var(--color-black);
+}
+
+
+/* ============================================================
+   ARCHIVE THEME CARDS (landing page)
+   ============================================================ */
+
+.theme-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.theme-card a {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  color: var(--color-black);
+  text-decoration: none;
+}
+
+.theme-card a:hover {
+  color: var(--color-red);
+}
+
+.theme-card a:hover img {
+  opacity: 0.88;
+}
+
+.theme-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  outline: 1px solid var(--color-black);
+  transition: opacity 0.15s ease;
+}
+
+.theme-card__title {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  margin-top: var(--space-xs);
+  padding-top: var(--space-xs);
+  border-top: 1px solid var(--color-black);
+  line-height: 1.4;
+}
+
+.theme-card a:hover .theme-card__title {
+  color: var(--color-red);
+}
+
+
+/* ============================================================
+   COLLECTION PAGE HEADER
+   ============================================================ */
+
+.collection-header {
+  padding: var(--space-lg) 0 var(--space-md);
+  border-bottom: 2px solid var(--color-black);
+  margin-bottom: var(--space-lg);
+}
+
+.collection-header .section-label {
+  color: var(--color-red);
+}
+
+
+/* ============================================================
+   GALLERY PAGE HEADER
+   ============================================================ */
+
+.gallery-header {
+  padding: var(--space-lg) 0 var(--space-md);
+  margin-bottom: var(--space-lg);
+  border-bottom: 2px solid var(--color-black);
+}
+
+
+/* ============================================================
+   ARCHIVE LANDING HEADER
+   ============================================================ */
+
+.archive-header {
+  padding: var(--space-lg) 0 var(--space-md);
+  margin-bottom: var(--space-lg);
+  border-bottom: 2px solid var(--color-black);
+}
+
+
+/* ============================================================
+   SITE FOOTER
+   ============================================================ */
+
+.site-footer {
+  padding: var(--space-md) var(--gutter);
+  border-top: 1px solid var(--color-black);
+  margin-top: auto;
+}
+
+.site-footer p {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-black);
+}
+
+.site-footer a:hover {
+  color: var(--color-red);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 768px) {
+  :root {
+    --grid-gap: 1.25rem;
+  }
+
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--gutter);
+  }
+
+  .nav-list {
+    gap: var(--space-xs) var(--space-sm);
+  }
+
+  .home-layout {
+    padding: var(--space-lg) var(--gutter);
+    padding-left: var(--gutter);
+  }
+
+  .home-name {
+    margin-bottom: var(--space-md);
+  }
+
+  .page-title {
+    font-size: var(--font-size-lg);
+  }
+
+  .collection-header,
+  .gallery-header,
+  .archive-header {
+    padding-top: var(--space-md);
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  :root {
+    --grid-gap: 1rem;
+  }
+
+  .image-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .image-grid--gallery,
+  .image-grid--archive,
+  .image-grid--collection {
+    grid-template-columns: 1fr;
+  }
+
+  .home-bio {
+    font-size: var(--font-size-base);
+  }
+
+  .home-nav .nav-link {
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* Large screens — let grid breathe more */
+@media (min-width: 1200px) {
+  :root {
+    --grid-gap: 2rem;
+  }
+
+  .image-grid--archive {
+    --grid-gap: 3rem;
+  }
+}
