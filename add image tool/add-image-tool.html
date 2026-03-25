@@ -142,6 +142,37 @@
       cursor: pointer;
     }
 
+    /* Button row — holds Add to batch + Generate side by side */
+    .btn-row {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      align-items: stretch;
+    }
+
+    .btn-row .generate-btn {
+      margin-top: 0;
+      flex: 1;
+    }
+
+    .add-btn {
+      flex: 1;
+      background: none;
+      color: var(--black);
+      border: 1px solid var(--black);
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 1rem;
+      cursor: pointer;
+      transition: background 0.1s, color 0.1s;
+    }
+
+    .add-btn:hover { background: var(--black); color: var(--white); }
+    .add-btn.added { background: var(--black); color: var(--white); }
+
     .generate-btn {
       display: block;
       width: 100%;
@@ -160,6 +191,42 @@
     }
 
     .generate-btn:hover { background: var(--red); }
+
+    /* Batch queue */
+    .batch-section {
+      margin-top: 2.5rem;
+      display: none;
+    }
+
+    .batch-section.visible { display: block; }
+
+    .batch-list {
+      list-style: none;
+      border: 1px solid var(--black);
+      border-top: none;
+    }
+
+    .batch-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid var(--black);
+      gap: 1rem;
+    }
+
+    .batch-item:last-child { border-bottom: none; }
+
+    .batch-item-label {
+      font-size: 0.72rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .batch-section .generate-btn {
+      margin-top: 0.75rem;
+    }
 
     /* Output */
     .output-section {
@@ -267,6 +334,7 @@
     @media (max-width: 480px) {
       body { padding: 1rem; }
       .tab-btn { font-size: 0.6rem; padding: 0.6rem 0.25rem; }
+      .btn-row { flex-direction: column; gap: 0.5rem; }
     }
   </style>
 </head>
@@ -310,7 +378,10 @@
       <input type="url" id="d-link" placeholder="https://www.etsy.com/listing/...">
     </div>
 
-    <button class="generate-btn" onclick="generateDrawing()">Generate code ↓</button>
+    <div class="btn-row">
+      <button class="add-btn" id="add-drawing-btn" onclick="addToDrawingBatch()">+ Add to batch</button>
+      <button class="generate-btn" onclick="generateDrawing()">Generate code ↓</button>
+    </div>
   </div>
 
   <!-- ARCHIVE panel -->
@@ -352,7 +423,20 @@
       <input type="text" id="a-source" placeholder="Source, year">
     </div>
 
-    <button class="generate-btn" onclick="generateArchive()">Generate code ↓</button>
+    <div class="btn-row">
+      <button class="add-btn" id="add-archive-btn" onclick="addToArchiveBatch()">+ Add to batch</button>
+      <button class="generate-btn" onclick="generateArchive()">Generate code ↓</button>
+    </div>
+  </div>
+
+  <!-- Batch queue -->
+  <div class="batch-section" id="batch-section">
+    <div class="output-header">
+      <span class="output-label" id="batch-count-label">Batch (0)</span>
+      <button class="copy-btn" onclick="clearBatch()">Clear all</button>
+    </div>
+    <ul class="batch-list" id="batch-list"></ul>
+    <button class="generate-btn" onclick="generateAll()">Generate all ↓</button>
   </div>
 
   <!-- Output -->
@@ -370,6 +454,50 @@
   </div>
 
   <script>
+    // ── Batch state ──────────────────────────────────────────────────────────
+    let batch = []; // { label, code, dest }
+
+    function renderBatch() {
+      const section = document.getElementById('batch-section');
+      const list = document.getElementById('batch-list');
+      const countLabel = document.getElementById('batch-count-label');
+
+      countLabel.textContent = 'Batch (' + batch.length + ')';
+      list.innerHTML = '';
+
+      batch.forEach((item, i) => {
+        const li = document.createElement('li');
+        li.className = 'batch-item';
+        li.innerHTML =
+          '<span class="batch-item-label">' + esc(item.label) + '</span>' +
+          '<button class="copy-btn" onclick="removeBatchItem(' + i + ')">Remove</button>';
+        list.appendChild(li);
+      });
+
+      section.classList.toggle('visible', batch.length > 0);
+    }
+
+    function removeBatchItem(i) {
+      batch.splice(i, 1);
+      renderBatch();
+    }
+
+    function clearBatch() {
+      batch = [];
+      renderBatch();
+    }
+
+    function flashAdded(btnId) {
+      const btn = document.getElementById(btnId);
+      btn.textContent = 'Added ✓';
+      btn.classList.add('added');
+      setTimeout(() => {
+        btn.textContent = '+ Add to batch';
+        btn.classList.remove('added');
+      }, 1500);
+    }
+
+    // ── Tab switcher ─────────────────────────────────────────────────────────
     function switchTab(tab) {
       document.querySelectorAll('.tab-btn').forEach(b => {
         b.classList.toggle('active', b.dataset.tab === tab);
@@ -396,14 +524,10 @@
       document.getElementById('copy-btn').classList.remove('copied');
     }
 
-    function generateDrawing() {
-      const filename = document.getElementById('d-filename').value.trim() || 'your-image.jpg';
-      const alt = document.getElementById('d-alt').value.trim() || 'Artwork description';
-      const caption = document.getElementById('d-caption').value.trim() || 'Title, Medium, Year';
-      const link = document.getElementById('d-link').value.trim() || '#';
+    // ── Drawing ──────────────────────────────────────────────────────────────
+    function buildDrawingCode(filename, alt, caption, link) {
       const ariaLabel = 'View ' + caption + ' (opens in new tab)';
-
-      const code =
+      return (
 `<li>
   <figure class="image-block">
     <a
@@ -413,7 +537,7 @@
       aria-label="${esc(ariaLabel)}"
     >
       <img
-        src="/images/gallery/${esc(filename)}"
+        src="/gallery/images/${esc(filename)}"
         alt="${esc(alt)}"
         width="800"
         height="1000"
@@ -422,10 +546,34 @@
     </a>
     <figcaption>${esc(caption)}</figcaption>
   </figure>
-</li>`;
+</li>`
+      );
+    }
+
+    function addToDrawingBatch() {
+      const filename = document.getElementById('d-filename').value.trim() || 'your-image.jpg';
+      const alt = document.getElementById('d-alt').value.trim() || 'Artwork description';
+      const caption = document.getElementById('d-caption').value.trim() || 'Title, Medium, Year';
+      const link = document.getElementById('d-link').value.trim() || '#';
+      batch.push({
+        label: filename,
+        code: buildDrawingCode(filename, alt, caption, link),
+        dest: '/gallery/images/'
+      });
+      renderBatch();
+      flashAdded('add-drawing-btn');
+    }
+
+    function generateDrawing() {
+      const filename = document.getElementById('d-filename').value.trim() || 'your-image.jpg';
+      const alt = document.getElementById('d-alt').value.trim() || 'Artwork description';
+      const caption = document.getElementById('d-caption').value.trim() || 'Title, Medium, Year';
+      const link = document.getElementById('d-link').value.trim() || '#';
+
+      const code = buildDrawingCode(filename, alt, caption, link);
 
       const instructions = `
-        <div class="step"><span class="step-num">1</span><span>Upload <code>${esc(filename)}</code> to <code>/images/gallery/</code> in your repo</span></div>
+        <div class="step"><span class="step-num">1</span><span>Upload <code>${esc(filename)}</code> to <code>/gallery/images/</code> in your repo</span></div>
         <div class="step"><span class="step-num">2</span><span>Open <code>gallery/index.html</code> and paste this block inside the <code>&lt;ul class="image-grid image-grid--gallery"&gt;</code> list, before the closing <code>&lt;/ul&gt;</code></span></div>
         <div class="step"><span class="step-num">3</span><span>Commit and push — done</span></div>
       `;
@@ -433,14 +581,8 @@
       showOutput(code, instructions);
     }
 
-    function generateArchive() {
-      const collection = document.getElementById('a-collection').value.trim() || 'collection-name';
-      const filename = document.getElementById('a-filename').value.trim() || 'your-image.jpg';
-      const alt = document.getElementById('a-alt').value.trim() || 'Image description';
-      const latin = document.getElementById('a-latin').value.trim();
-      const common = document.getElementById('a-common').value.trim();
-      const source = document.getElementById('a-source').value.trim() || 'Source, year';
-
+    // ── Archive ──────────────────────────────────────────────────────────────
+    function buildArchiveCode(collection, filename, alt, latin, common, source) {
       let caption = '';
       if (latin && common) {
         caption = `<em>${esc(latin)}</em> (${esc(common)}). ${esc(source)}. Public domain.`;
@@ -450,7 +592,7 @@
         caption = `${esc(source)}. Public domain.`;
       }
 
-      const code =
+      return (
 `<li>
   <figure class="image-block">
     <img
@@ -464,7 +606,35 @@
       ${caption}
     </figcaption>
   </figure>
-</li>`;
+</li>`
+      );
+    }
+
+    function addToArchiveBatch() {
+      const collection = document.getElementById('a-collection').value.trim() || 'collection-name';
+      const filename = document.getElementById('a-filename').value.trim() || 'your-image.jpg';
+      const alt = document.getElementById('a-alt').value.trim() || 'Image description';
+      const latin = document.getElementById('a-latin').value.trim();
+      const common = document.getElementById('a-common').value.trim();
+      const source = document.getElementById('a-source').value.trim() || 'Source, year';
+      batch.push({
+        label: filename,
+        code: buildArchiveCode(collection, filename, alt, latin, common, source),
+        dest: '/archive/' + collection + '/images/'
+      });
+      renderBatch();
+      flashAdded('add-archive-btn');
+    }
+
+    function generateArchive() {
+      const collection = document.getElementById('a-collection').value.trim() || 'collection-name';
+      const filename = document.getElementById('a-filename').value.trim() || 'your-image.jpg';
+      const alt = document.getElementById('a-alt').value.trim() || 'Image description';
+      const latin = document.getElementById('a-latin').value.trim();
+      const common = document.getElementById('a-common').value.trim();
+      const source = document.getElementById('a-source').value.trim() || 'Source, year';
+
+      const code = buildArchiveCode(collection, filename, alt, latin, common, source);
 
       const instructions = `
         <div class="step"><span class="step-num">1</span><span>Upload <code>${esc(filename)}</code> to <code>/archive/${esc(collection)}/images/</code> in your repo</span></div>
@@ -475,6 +645,40 @@
       showOutput(code, instructions);
     }
 
+    // ── Generate all ─────────────────────────────────────────────────────────
+    function generateAll() {
+      if (batch.length === 0) return;
+
+      const allCode = batch.map(item => item.code).join('\n\n');
+
+      // Group filenames by destination folder for upload instructions
+      const byDest = {};
+      batch.forEach(item => {
+        if (!byDest[item.dest]) byDest[item.dest] = [];
+        byDest[item.dest].push(item.label);
+      });
+
+      let stepNum = 1;
+      let uploadSteps = '';
+      Object.entries(byDest).forEach(([dest, files]) => {
+        const fileList = files.map(f => '<code>' + esc(f) + '</code>').join(', ');
+        uploadSteps +=
+          '<div class="step"><span class="step-num">' + stepNum + '</span>' +
+          '<span>Upload ' + fileList + ' to <code>' + esc(dest) + '</code></span></div>';
+        stepNum++;
+      });
+
+      const instructions =
+        uploadSteps +
+        '<div class="step"><span class="step-num">' + stepNum + '</span>' +
+        '<span>Paste all blocks into the relevant <code>&lt;ul&gt;</code> list in your HTML file</span></div>' +
+        '<div class="step"><span class="step-num">' + (stepNum + 1) + '</span>' +
+        '<span>Commit and push — done</span></div>';
+
+      showOutput(allCode, instructions);
+    }
+
+    // ── Copy ─────────────────────────────────────────────────────────────────
     function copyCode() {
       const text = document.getElementById('output-code').textContent;
       navigator.clipboard.writeText(text).then(() => {
