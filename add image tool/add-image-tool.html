@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Image — Rose Site Tool</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #000000;
+      --white: #ffffff;
+      --red: #D3000B;
+      --mono: 'DM Mono', monospace;
+      --gutter: clamp(1.25rem, 5vw, 3rem);
+    }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: var(--mono);
+      font-size: 0.875rem;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: var(--gutter);
+    }
+
+    header {
+      border-bottom: 2px solid var(--black);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--black);
+      opacity: 0.5;
+      margin-bottom: 0.25rem;
+    }
+
+    h1 {
+      font-size: clamp(1.4rem, 5vw, 2.2rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    /* Tab switcher */
+    .tabs {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--black);
+      margin-bottom: 2rem;
+      width: 100%;
+    }
+
+    .tab-btn {
+      flex: 1;
+      background: none;
+      border: none;
+      border-right: 1px solid var(--black);
+      padding: 0.75rem 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      color: var(--black);
+      opacity: 0.45;
+      transition: opacity 0.1s, background 0.1s;
+    }
+
+    .tab-btn:last-child { border-right: none; }
+
+    .tab-btn.active {
+      opacity: 1;
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .tab-btn:hover:not(.active) { opacity: 0.75; }
+
+    /* Form panels */
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    .field {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+
+    .hint {
+      font-size: 0.65rem;
+      opacity: 0.5;
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.05em;
+    }
+
+    input, textarea, select {
+      display: block;
+      width: 100%;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--black);
+      background: var(--white);
+      border: 1px solid var(--black);
+      padding: 0.6rem 0.75rem;
+      line-height: 1.5;
+      appearance: none;
+      border-radius: 0;
+      outline: none;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--black);
+      outline: 2px solid var(--black);
+      outline-offset: 1px;
+    }
+
+    textarea { resize: vertical; min-height: 4rem; }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23000' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+
+    .generate-btn {
+      display: block;
+      width: 100%;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 1rem;
+      cursor: pointer;
+      transition: background 0.1s;
+      margin-top: 2rem;
+    }
+
+    .generate-btn:hover { background: var(--red); }
+
+    /* Output */
+    .output-section {
+      margin-top: 2.5rem;
+      display: none;
+    }
+
+    .output-section.visible { display: block; }
+
+    .output-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-top: 2px solid var(--black);
+      padding-top: 1rem;
+      margin-bottom: 0.75rem;
+      gap: 1rem;
+    }
+
+    .output-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .copy-btn {
+      background: none;
+      border: 1px solid var(--black);
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.75rem;
+      cursor: pointer;
+      color: var(--black);
+      white-space: nowrap;
+      transition: background 0.1s, color 0.1s;
+      flex-shrink: 0;
+    }
+
+    .copy-btn:hover { background: var(--black); color: var(--white); }
+    .copy-btn.copied { background: var(--black); color: var(--white); }
+
+    .output-code {
+      background: #f4f4f4;
+      border: 1px solid var(--black);
+      padding: 1rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      word-break: break-all;
+      overflow-x: auto;
+      color: var(--black);
+      -webkit-user-select: all;
+      user-select: all;
+    }
+
+    .instructions {
+      margin-top: 1.5rem;
+      border: 1px solid var(--black);
+      padding: 1rem;
+    }
+
+    .instructions p {
+      font-size: 0.72rem;
+      line-height: 1.7;
+      margin-bottom: 0.5rem;
+    }
+
+    .instructions p:last-child { margin-bottom: 0; }
+
+    .instructions strong {
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    .step {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.72rem;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 1.4rem;
+      height: 1.4rem;
+      border: 1px solid var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      font-weight: 500;
+    }
+
+    code {
+      background: #efefef;
+      padding: 0.1em 0.35em;
+      font-family: var(--mono);
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 1rem; }
+      .tab-btn { font-size: 0.6rem; padding: 0.6rem 0.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <p class="label">Rose — Site Tool</p>
+    <h1>Add an Image</h1>
+  </header>
+
+  <!-- Tab switcher -->
+  <div class="tabs" role="tablist">
+    <button class="tab-btn active" role="tab" aria-selected="true" data-tab="drawing" onclick="switchTab('drawing')">Drawing</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="archive" onclick="switchTab('archive')">Beautiful Thing</button>
+  </div>
+
+  <!-- DRAWINGS panel -->
+  <div class="panel active" id="panel-drawing">
+
+    <div class="field">
+      <label for="d-filename">Image filename</label>
+      <p class="hint">e.g. toadstool-ink-2026.jpg</p>
+      <input type="text" id="d-filename" placeholder="my-drawing-title-medium-year.jpg" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+    </div>
+
+    <div class="field">
+      <label for="d-alt">Alt text</label>
+      <p class="hint">Describe what's in the image: medium, subject, year</p>
+      <textarea id="d-alt" placeholder="Ink drawing of a cluster of toadstools on a mossy log, 2026"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="d-caption">Caption</label>
+      <p class="hint">Shown below the image</p>
+      <input type="text" id="d-caption" placeholder="Toadstools, ink on paper, 2026">
+    </div>
+
+    <div class="field">
+      <label for="d-link">Link (optional)</label>
+      <p class="hint">Etsy listing URL, or leave blank</p>
+      <input type="url" id="d-link" placeholder="https://www.etsy.com/listing/...">
+    </div>
+
+    <button class="generate-btn" onclick="generateDrawing()">Generate code ↓</button>
+  </div>
+
+  <!-- ARCHIVE panel -->
+  <div class="panel" id="panel-archive">
+
+    <div class="field">
+      <label for="a-collection">Collection folder</label>
+      <p class="hint">The folder name under /archive/</p>
+      <input type="text" id="a-collection" placeholder="victorian-botanicals" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+    </div>
+
+    <div class="field">
+      <label for="a-filename">Image filename</label>
+      <p class="hint">e.g. victorian-botanical-engraving-rosa-canina-1850.jpg</p>
+      <input type="text" id="a-filename" placeholder="subject-type-name-date.jpg" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+    </div>
+
+    <div class="field">
+      <label for="a-alt">Alt text</label>
+      <p class="hint">Describe the image in detail — what's shown, style, date</p>
+      <textarea id="a-alt" placeholder="Victorian botanical engraving of Rosa canina showing full plant with flowers, hips, and stem detail, 1850"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="a-latin">Latin name (optional)</label>
+      <p class="hint">e.g. Rosa canina</p>
+      <input type="text" id="a-latin" placeholder="Rosa canina">
+    </div>
+
+    <div class="field">
+      <label for="a-common">Common name (optional)</label>
+      <p class="hint">e.g. Dog Rose</p>
+      <input type="text" id="a-common" placeholder="Dog Rose">
+    </div>
+
+    <div class="field">
+      <label for="a-source">Source / date</label>
+      <p class="hint">e.g. Köhler's Medizinal-Pflanzen, 1850</p>
+      <input type="text" id="a-source" placeholder="Source, year">
+    </div>
+
+    <button class="generate-btn" onclick="generateArchive()">Generate code ↓</button>
+  </div>
+
+  <!-- Output -->
+  <div class="output-section" id="output-section">
+
+    <div class="output-header">
+      <span class="output-label">Your code</span>
+      <button class="copy-btn" id="copy-btn" onclick="copyCode()">Copy</button>
+    </div>
+
+    <div class="output-code" id="output-code"></div>
+
+    <div class="instructions" id="output-instructions"></div>
+
+  </div>
+
+  <script>
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.tab === tab);
+        b.setAttribute('aria-selected', b.dataset.tab === tab);
+      });
+      document.querySelectorAll('.panel').forEach(p => {
+        p.classList.toggle('active', p.id === 'panel-' + tab);
+      });
+      document.getElementById('output-section').classList.remove('visible');
+    }
+
+    function esc(str) {
+      return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function showOutput(code, instructionsHTML) {
+      const out = document.getElementById('output-code');
+      out.textContent = code;
+      document.getElementById('output-instructions').innerHTML = instructionsHTML;
+      const section = document.getElementById('output-section');
+      section.classList.add('visible');
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('copy-btn').textContent = 'Copy';
+      document.getElementById('copy-btn').classList.remove('copied');
+    }
+
+    function generateDrawing() {
+      const filename = document.getElementById('d-filename').value.trim() || 'your-image.jpg';
+      const alt = document.getElementById('d-alt').value.trim() || 'Artwork description';
+      const caption = document.getElementById('d-caption').value.trim() || 'Title, Medium, Year';
+      const link = document.getElementById('d-link').value.trim() || '#';
+      const ariaLabel = 'View ' + caption + ' (opens in new tab)';
+
+      const code =
+`<li>
+  <figure class="image-block">
+    <a
+      href="${esc(link)}"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="${esc(ariaLabel)}"
+    >
+      <img
+        src="/images/gallery/${esc(filename)}"
+        alt="${esc(alt)}"
+        width="800"
+        height="1000"
+        loading="lazy"
+      >
+    </a>
+    <figcaption>${esc(caption)}</figcaption>
+  </figure>
+</li>`;
+
+      const instructions = `
+        <div class="step"><span class="step-num">1</span><span>Upload <code>${esc(filename)}</code> to <code>/images/gallery/</code> in your repo</span></div>
+        <div class="step"><span class="step-num">2</span><span>Open <code>gallery/index.html</code> and paste this block inside the <code>&lt;ul class="image-grid image-grid--gallery"&gt;</code> list, before the closing <code>&lt;/ul&gt;</code></span></div>
+        <div class="step"><span class="step-num">3</span><span>Commit and push — done</span></div>
+      `;
+
+      showOutput(code, instructions);
+    }
+
+    function generateArchive() {
+      const collection = document.getElementById('a-collection').value.trim() || 'collection-name';
+      const filename = document.getElementById('a-filename').value.trim() || 'your-image.jpg';
+      const alt = document.getElementById('a-alt').value.trim() || 'Image description';
+      const latin = document.getElementById('a-latin').value.trim();
+      const common = document.getElementById('a-common').value.trim();
+      const source = document.getElementById('a-source').value.trim() || 'Source, year';
+
+      let caption = '';
+      if (latin && common) {
+        caption = `<em>${esc(latin)}</em> (${esc(common)}). ${esc(source)}. Public domain.`;
+      } else if (latin) {
+        caption = `<em>${esc(latin)}</em>. ${esc(source)}. Public domain.`;
+      } else {
+        caption = `${esc(source)}. Public domain.`;
+      }
+
+      const code =
+`<li>
+  <figure class="image-block">
+    <img
+      src="/archive/${esc(collection)}/images/${esc(filename)}"
+      alt="${esc(alt)}"
+      width="800"
+      height="1050"
+      loading="lazy"
+    >
+    <figcaption>
+      ${caption}
+    </figcaption>
+  </figure>
+</li>`;
+
+      const instructions = `
+        <div class="step"><span class="step-num">1</span><span>Upload <code>${esc(filename)}</code> to <code>/archive/${esc(collection)}/images/</code> in your repo</span></div>
+        <div class="step"><span class="step-num">2</span><span>Open <code>/archive/${esc(collection)}/index.html</code> and paste this block inside the <code>&lt;ul class="image-grid image-grid--collection"&gt;</code> list</span></div>
+        <div class="step"><span class="step-num">3</span><span>Commit and push — done</span></div>
+      `;
+
+      showOutput(code, instructions);
+    }
+
+    function copyCode() {
+      const text = document.getElementById('output-code').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copy-btn');
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>

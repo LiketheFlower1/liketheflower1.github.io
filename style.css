@@ -195,7 +195,7 @@ p + p {
   gap: var(--space-md);
 }
 
-.site-header img {
+.site-header img:not(.logo-image) {
   width: clamp(220px, 100%, 860px);
   height: auto;
 }
@@ -270,6 +270,7 @@ body.page-home {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  border-top: 2px solid var(--color-black);
 }
 
 .home-layout {
@@ -522,7 +523,7 @@ body.page-home {
 .gallery-header {
   padding: var(--space-lg) 0 var(--space-md);
   margin-bottom: var(--space-lg);
-  border-bottom: 2px solid var(--color-black);
+  border-bottom: 1px solid var(--color-black);
 }
 
 
@@ -533,7 +534,7 @@ body.page-home {
 .archive-header {
   padding: var(--space-lg) 0 var(--space-md);
   margin-bottom: var(--space-lg);
-  border-bottom: 2px solid var(--color-black);
+  border-bottom: 1px solid var(--color-black);
 }
 
 
@@ -597,6 +598,12 @@ body.page-home {
   color: var(--color-red);
 }
 
+/* Social icons row spacing within site footer */
+.site-footer .home-social {
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
 
 /* ============================================================
    RESPONSIVE
@@ -615,7 +622,7 @@ body.page-home {
     padding: var(--space-sm) var(--gutter);
   }
 
-  .site-header img {
+  .site-header img:not(.logo-image) {
     width: clamp(200px, 100%, 600px);
   }
 
@@ -655,7 +662,7 @@ body.page-home {
     grid-template-columns: 1fr;
   }
 
-  .site-header img {
+  .site-header img:not(.logo-image) {
     width: 100%;
   }
 

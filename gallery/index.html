@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="../style.css">
 </head>
 <body class="page-gallery page-wrapper">
 
@@ -18,25 +18,25 @@
     <!-- Logo: replace /images/logo.png with your actual logo file -->
     <a href="/" class="site-logo" aria-label="Rose — Artist Site, home">
       <img
-        src="/images/logo.png"
+        src="../assets/logo.png"
         alt="Rose — Artist Site"
         class="logo-image"
-        width="160"
-        height="60"
+        width="64"
+        height="24"
       >
     </a>
 
     <nav class="site-nav" aria-label="Primary navigation">
       <ul class="nav-list">
         <li><a href="/" class="nav-link">Home</a></li>
-        <li><a href="/gallery/" class="nav-link" aria-current="page">Drawings and prints</a></li>
+        <li><a href="/gallery/" class="nav-link" aria-current="page">Drawings</a></li>
         <li>
           <a
             href="https://www.etsy.com/shop/MyNarrativeFlow"
             class="nav-link"
             target="_blank"
             rel="noopener noreferrer"
-          >shop ↗</a>
+          >Shop ↗</a>
         </li>
         <li>
           <a
@@ -44,9 +44,9 @@
             class="nav-link"
             target="_blank"
             rel="noopener noreferrer"
-          >read my letters ↗</a>
+          >Read My Letters ↗</a>
         </li>
-        <li><a href="/archive/" class="nav-link">Beautiful things</a></li>
+        <li><a href="/archive/" class="nav-link">Old Beautiful Things</a></li>
       </ul>
     </nav>
   </header>
@@ -69,6 +69,26 @@
           <!-- [IMAGE BLOCK — copy pattern below for each artwork] -->
 
           <li>
+  <figure class="image-block">
+    <a
+      href="#"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="View Tiles, ink, 2026 (opens in new tab)"
+    >
+      <img
+        src="/gallery/images/finishedtiles.jpg"
+        alt="Ink drawings of public domain images"
+        width="800"
+        height="1000"
+        loading="lazy"
+      >
+    </a>
+    <figcaption>Tiles, ink, 2026</figcaption>
+  </figure>
+</li>
+
+          <li>
             <figure class="image-block">
               <a
                 href="#"
@@ -76,9 +96,8 @@
                 rel="noopener noreferrer"
                 aria-label="View [artwork title] (opens in new tab)"
               >
-                <!-- Replace with: descriptive-artwork-title-year.jpg -->
                 <img
-                  src="/images/gallery/artwork-title-medium-year.jpg"
+                  src="/gallery/images/artwork-title-medium-year-02.jpg"
                   alt="[Descriptive alt text: medium, subject, year]"
                   width="800"
                   height="1000"
@@ -98,27 +117,7 @@
                 aria-label="View [artwork title] (opens in new tab)"
               >
                 <img
-                  src="/images/gallery/artwork-title-medium-year-02.jpg"
-                  alt="[Descriptive alt text: medium, subject, year]"
-                  width="800"
-                  height="1000"
-                  loading="lazy"
-                >
-              </a>
-              <figcaption>[Artwork Title], [Medium], [Year]</figcaption>
-            </figure>
-          </li>
-
-          <li>
-            <figure class="image-block">
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="View [artwork title] (opens in new tab)"
-              >
-                <img
-                  src="/images/gallery/artwork-title-medium-year-03.jpg"
+                  src="/gallery/images/artwork-title-medium-year-03.jpg"
                   alt="[Descriptive alt text: medium, subject, year]"
                   width="800"
                   height="1000"
@@ -139,17 +138,17 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>© 2026 Rose</p>
       <nav class="footer-nav" aria-label="Footer navigation">
         <ul class="nav-list">
-          <li><a href="/gallery/" class="nav-link">Drawings and prints</a></li>
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/gallery/" class="nav-link" aria-current="page">Drawings</a></li>
           <li>
             <a
               href="https://www.etsy.com/shop/MyNarrativeFlow"
               class="nav-link"
               target="_blank"
               rel="noopener noreferrer"
-            >shop ↗</a>
+            >Shop ↗</a>
           </li>
           <li>
             <a
@@ -157,11 +156,23 @@
               class="nav-link"
               target="_blank"
               rel="noopener noreferrer"
-            >read my letters ↗</a>
+            >Read My Letters ↗</a>
           </li>
-          <li><a href="/archive/" class="nav-link">Beautiful things</a></li>
+          <li><a href="/archive/" class="nav-link">Old Beautiful Things</a></li>
         </ul>
       </nav>
+      <div class="home-social">
+        <a href="mailto:your@email.com" aria-label="Email Rose">
+          <img src="../assets/socialicons-email-1040.png" alt="Email" class="social-icon">
+        </a>
+        <a href="https://www.pinterest.com/mynarrativeflow" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+          <img src="../assets/socialicons-pinterest-1040.png" alt="Pinterest" class="social-icon">
+        </a>
+        <a href="https://psdraftinprogress.substack.com" target="_blank" rel="noopener noreferrer" aria-label="Substack">
+          <img src="../assets/socialicons-substack-1040.png" alt="Substack" class="social-icon">
+        </a>
+      </div>
+      <p>© 2026 Rose</p>
     </div>
   </footer>
 
