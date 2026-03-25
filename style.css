@@ -193,6 +193,11 @@ p + p {
   gap: var(--space-md);
 }
 
+.site-header img {
+  width: clamp(220px, 100%, 860px);
+  height: auto;
+}
+
 .site-logo {
   display: block;
   flex-shrink: 0;
@@ -305,14 +310,12 @@ body.page-home {
   margin-bottom: var(--space-md);
 }
 
-.home-name {
-  font-family: var(--font-mono);
-  font-size: clamp(var(--font-size-lg), 6vw, var(--font-size-2xl));
-  font-weight: var(--font-weight-medium);
-  letter-spacing: var(--tracking-tight);
-  line-height: 1;
-  text-transform: uppercase;
-  color: var(--color-black);
+/* .home-name removed — replaced by .home-header-image */
+
+.home-header-image {
+  display: block;
+  width: clamp(280px, 55vw, 900px);
+  height: auto;
   margin-bottom: var(--space-lg);
 }
 
@@ -569,6 +572,10 @@ body.page-home {
     padding: var(--space-sm) var(--gutter);
   }
 
+  .site-header img {
+    width: clamp(200px, 100%, 600px);
+  }
+
   .nav-list {
     gap: var(--space-xs) var(--space-sm);
   }
@@ -576,10 +583,6 @@ body.page-home {
   .home-layout {
     padding: var(--space-lg) var(--gutter);
     padding-left: var(--gutter);
-  }
-
-  .home-name {
-    margin-bottom: var(--space-md);
   }
 
   .page-title {
@@ -607,6 +610,10 @@ body.page-home {
   .image-grid--archive,
   .image-grid--collection {
     grid-template-columns: 1fr;
+  }
+
+  .site-header img {
+    width: 100%;
   }
 
   .home-bio {
