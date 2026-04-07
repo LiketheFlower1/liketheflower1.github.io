@@ -19,6 +19,43 @@
 
   <link rel="stylesheet" href="style.css">
 </head>
+  <header class="site-header">
+    <!-- Logo: replace /images/logo.png with your actual logo file -->
+    <a href="/" class="site-logo" aria-label="Rose — Artist Site, home">
+      <img
+        src="../assets/logo.png"
+        alt="Rose — Artist Site"
+        class="logo-image"
+        width="64"
+        height="24"
+      >
+    </a>
+
+    <nav class="site-nav" aria-label="Primary navigation">
+      <ul class="nav-list">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/gallery/" class="nav-link" aria-current="page">Drawings</a></li>
+        <li>
+          <a
+            href="https://www.etsy.com/shop/MyNarrativeFlow"
+            class="nav-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Shop ↗</a>
+        </li>
+        <li>
+          <a
+            href="https://psdraftinprogress.substack.com"
+            class="nav-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Read My Letters ↗</a>
+        </li>
+        <li><a href="/archive/" class="nav-link">Old Beautiful Things</a></li>
+      </ul>
+    </nav>
+  </header>
+
 <body class="page-home">
 
   <div class="home-layout">
@@ -37,16 +74,20 @@
     <!-- Bio: replace all four lines with your actual text -->
     <div class="home-bio" aria-label="Artist biography">
       <!-- [BIO TEXT HERE] -->
-      <p>Hey there! I'm Rose. I believe strongly that we make art and write things 
-        to keep ourselves well, and art doesn't have to be perfect to be worth making.
-        I make sketchbooks and journals for artists and writers, draw a lot, and when the ADHD takes over,
-        I needlefelt too many toadstools. I also write an ongoing public correspondence with a poet friend, which you can read here,
-        and I dig for illustrations and designs in historical archives, which you can find here. I'm in recovery
-        from an affair with cocktails, a habit of skipping meals, and the belief that art only counts if it's good.
-        I live on a farm in Pennsylvania with a rotating cast of rescue animals who never question my creative output.
+      <p>Hey there! I'm Rose. I hope you find something here
+        that inspires you to doodle, draw, or work on that book. I make durable, handmade sketchbooks and
+        journals for artists and writers. I draw a lot, write an ongoing
+        public correspondence with my poet friend, and dig for vintage
+        illustrations and designs in historical archives. 
+        
         </p>
-           
-    </div>
+      <p>
+      I'm in recovery from an affair with cocktails, a habit of skipping meals,
+      and the belief that art only counts if it's good. I live on a farm in
+      Pennsylvania with a rotating cast of rescue animals who have never questioned
+      why the ADHD sometimes takes over and I have to needlefelt a lot of toadstools.
+        </p><p>I hope you enjoy your time here.</p>
+              </div>
 
     <!-- Navigation -->
     <nav class="home-nav" aria-label="Primary navigation">
@@ -77,11 +118,7 @@
 
       </ul>
     </nav>
-     <img
-      src="assets/logo.png"
-      alt="Art with Rose"
-      class="home-logo-image"
-    >
+     
 
     <footer class="home-footer">
       <div class="home-social">
@@ -95,7 +132,7 @@
           <img src="assets/socialicons-substack-1040.png" alt="Substack" class="social-icon">
         </a>
       </div>
-      <p class="home-copyright">© 2026 Rose</p>
+      <p class="home-copyright">©2026 Rose</p>
     </footer>
   </div><!-- /home-layout -->
 
