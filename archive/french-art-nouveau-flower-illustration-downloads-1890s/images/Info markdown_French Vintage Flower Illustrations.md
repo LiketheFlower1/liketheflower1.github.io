@@ -20,11 +20,7 @@ URL slug: french-art-nouveau-flower-illustration-downloads-1890s
 
 SEO Keywords:french-art-nouveau-flower-illustration-downloads
 
-Collection Description: In this stunning set of French Art Nouveau illustrations of flowers, we see dozens of images of plants, trees, and blooms, adapted and reworked into ornamental patterns. The illustrations were compiled by Eugène Grasset, a Swiss designer known for pioneering Art Nouveau design. In the introduction, Grasset encourages readers not to copy the masters, but to return to botanical inspiration to create something new. "The craftsmen of our day must place themselves back in the state of archaeological ignorance of the workers of old," he writes, describing the "implacable war on imitation of the past." He continues: "The task is difficult... and we cannot, as our ancient predecessors could — I repeat — lean on the inventions of our immediate fathers." The resulting collection is a stunning set of flower illustrations and their adaptations to geometric and ornamental design. 
-
-
-
-Source: The Miriam and Ira D. Wallach Division of Art, Prints and Photographs: Art \& Architecture Collection, The New York Public Library. "La plante et ses applications ornementales" *The New York Public Library Digital Collections.* 1896. https://digitalcollections.nypl.org/collections/84fe2cd0-c6e4-012f-1676-3c075448cc4b
+Collection Description: In this stunning set of French Art Nouveau illustrations of flowers, we see dozens of images of plants, trees, and blooms, adapted and reworked into ornamental patterns. The illustrations were compiled by Eugène Grasset, a Swiss designer known for pioneering Art Nouveau design. In the introduction, Grasset encourages readers not to return to the masters, but to botanical inspiration itself to create something new. The resulting collection is a stunning set of flower illustrations and their adaptations to geometric and ornamental design.<br><br><strong> Source:</strong> The Miriam and Ira D. Wallach Division of Art, Prints and Photographs: Art &amp; Architecture Collection, The New York Public Library. <em>La plante et ses applications ornementales</em>, 1896. <a href="https://digitalcollections.nypl.org/collections/84fe2cd0-c6e4-012f-1676-3c075448cc4b">Permalink</a>
 
 
 
