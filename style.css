@@ -434,6 +434,11 @@ body.page-home {
   transition: opacity 0.15s ease;
 }
 
+.page-archive .image-block img,
+.page-collection .image-block img {
+  outline: none;
+}
+
 .image-block figcaption {
   font-family: var(--font-mono);
   font-size: var(--font-size-xs);
@@ -478,6 +483,10 @@ body.page-home {
   object-fit: cover;
   display: block;
   transition: opacity 0.15s ease;
+}
+
+.page-archive .theme-card img {
+  outline: none;
 }
 
 .theme-card__title {
