@@ -276,9 +276,11 @@ body.page-home {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: var(--space-xl) var(--gutter);
-  max-width: 860px;
+  padding-block: var(--space-xl);
+  padding-inline: var(--gutter);
+  max-width: var(--max-width);
   width: 100%;
+  margin-inline: auto;
 }
 
 .home-logo-link {
@@ -640,7 +642,8 @@ body.page-home {
   }
 
   .home-layout {
-    padding: var(--space-lg) var(--gutter);
+    padding-block: var(--space-lg);
+    padding-inline: var(--gutter);
   }
 
   .page-title {
