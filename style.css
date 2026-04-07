@@ -396,10 +396,16 @@ body.page-home {
   --grid-gap: 2rem;
 }
 
-/* Archive theme cards — can be larger */
+/* Archive landing — Pinterest-style masonry via CSS columns */
 .image-grid--archive {
-  --grid-min: 320px;
-  --grid-gap: 2.5rem;
+  display: block;
+  columns: 3 320px;
+  column-gap: 2.5rem;
+}
+
+.image-grid--archive > li {
+  break-inside: avoid;
+  margin-bottom: 2.5rem;
 }
 
 /* Collection detail — standard width */
@@ -479,8 +485,6 @@ body.page-home {
 
 .theme-card img {
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
   display: block;
   transition: opacity 0.15s ease;
 }
@@ -637,7 +641,6 @@ body.page-home {
 
   .home-layout {
     padding: var(--space-lg) var(--gutter);
-    padding-left: var(--gutter);
   }
 
   .page-title {
@@ -662,9 +665,12 @@ body.page-home {
   }
 
   .image-grid--gallery,
-  .image-grid--archive,
   .image-grid--collection {
     grid-template-columns: 1fr;
+  }
+
+  .image-grid--archive {
+    columns: 1;
   }
 
   .site-header img:not(.logo-image) {
@@ -687,6 +693,7 @@ body.page-home {
   }
 
   .image-grid--archive {
-    --grid-gap: 3rem;
+    columns: 4 320px;
+    column-gap: 3rem;
   }
 }
