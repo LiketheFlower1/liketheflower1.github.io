@@ -157,6 +157,18 @@ p + p {
   margin-top: var(--space-sm);
 }
 
+.home-bio a,
+.page-description a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: inherit;
+}
+
+.home-bio a:hover,
+.page-description a:hover {
+  color: var(--color-red);
+}
+
 
 /* ============================================================
    LAYOUT UTILITIES
@@ -187,12 +199,26 @@ p + p {
    ============================================================ */
 
 .site-header {
+  border-bottom: 2px solid var(--color-black);
+}
+
+.site-header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: var(--space-md) var(--gutter);
-  border-bottom: 2px solid var(--color-black);
+  max-width: var(--max-width);
+  margin-inline: auto;
+  width: 100%;
   gap: var(--space-md);
+}
+
+.site-header--home {
+  border-bottom: none;
+}
+
+.site-header--home .site-header-inner {
+  justify-content: flex-start;
 }
 
 .site-header img:not(.logo-image) {
@@ -259,6 +285,15 @@ p + p {
 
 .nav-link[aria-current="page"] {
   border-bottom: 2px solid var(--color-black);
+}
+
+.nav-link--shop {
+  color: var(--color-red);
+}
+
+.nav-link--shop:hover {
+  color: var(--color-red);
+  opacity: 0.75;
 }
 
 
@@ -633,10 +668,24 @@ body.page-home {
   margin-bottom: var(--space-sm);
 }
 
-.letters-subscribe iframe {
-  display: block;
-  max-width: 100%;
-  width: 480px;
+.letters-subscribe-btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-black);
+  background: transparent;
+  border: 2px solid var(--color-black);
+  padding: 0.75rem 2rem;
+  text-decoration: none;
+  transition: background 0.1s ease, color 0.1s ease;
+}
+
+.letters-subscribe-btn:hover {
+  background: var(--color-black);
+  color: var(--color-white);
 }
 
 
@@ -717,7 +766,7 @@ body.page-home {
     --grid-gap: 1.25rem;
   }
 
-  .site-header {
+  .site-header-inner {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-sm);
