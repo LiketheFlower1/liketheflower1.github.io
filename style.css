@@ -190,7 +190,7 @@ p + p {
 .site-main {
   flex: 1;
   padding-top: var(--space-lg);
-  padding-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
 }
 
 
@@ -311,7 +311,7 @@ body.page-home {
   display: flex;
   flex-direction: column;
   padding-top: var(--space-xl);
-  padding-bottom: var(--space-xl);
+  padding-bottom: var(--space-md);
   max-width: var(--max-width);
   width: 100%;
   margin-inline: auto;
@@ -374,6 +374,7 @@ body.page-home {
   flex-direction: row;
   flex-wrap: wrap;
   gap: var(--space-sm) var(--space-lg);
+  margin-top: var(--space-lg);
 }
 
 .home-nav .nav-link {
@@ -412,7 +413,7 @@ body.page-home {
   font-size: var(--font-size-md);
   line-height: 1.7;
   color: var(--color-black);
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
 }
 
 
@@ -589,7 +590,8 @@ body.page-home {
 
 .letters-header {
   padding: var(--space-lg) 0 var(--space-md);
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-md);
+  border-bottom: 1px dotted var(--color-black);
 }
 
 
@@ -605,6 +607,8 @@ body.page-home {
   text-transform: uppercase;
   line-height: 1.1;
   margin-bottom: var(--space-md);
+  margin-top: var(--space-md);
+
 }
 
 .substack-feed-embed {
@@ -714,6 +718,7 @@ body.page-home {
   flex-direction: row;
   gap: var(--space-md);
   align-items: center;
+  margin-bottom: var(--space-sm);
 }
 
 .social-icon {
