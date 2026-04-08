@@ -763,8 +763,8 @@ body.page-home {
 
 /* Social icons row spacing within site footer */
 .site-footer .home-social {
-  margin-top: var(--space-sm);
-  margin-bottom: var(--space-sm);
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-md);
 }
 
 
