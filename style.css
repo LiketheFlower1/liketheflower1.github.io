@@ -494,6 +494,10 @@ body.page-home {
  /* border-top: 1px solid var(--color-black);*/
 }
 
+.image-block figcaption a {
+   text-decoration: underline;
+}
+
 
 /* ============================================================
    ARCHIVE THEME CARDS (landing page)
